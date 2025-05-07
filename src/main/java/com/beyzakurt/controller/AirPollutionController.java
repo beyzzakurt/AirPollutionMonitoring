@@ -2,6 +2,7 @@ package com.beyzakurt.controller;
 
 import com.beyzakurt.model.AirPollutionModel;
 import com.beyzakurt.service.AirPollutionService;
+import com.beyzakurt.service.KafkaProducerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Mono;
 public class AirPollutionController {
 
     private final AirPollutionService airPollutionService;
+    private final KafkaProducerService kafkaProducerService;
 
     @GetMapping("/{city}")
     public Mono<AirPollutionModel> getAirPollution(@PathVariable String city) {
@@ -24,5 +26,10 @@ public class AirPollutionController {
         return airPollutionService.saveAirPollutionData(data);
     }
 
+    @PostMapping("/send-to-kafka")
+    public Mono<String> sendToKafka(@RequestBody AirPollutionModel data) {
+        kafkaProducerService.sendAirPollutionData(data);
+        return Mono.just("Veri Kafka'ya gönderildi: " + data.getData().getCity().getName());
+    }
 
 }
