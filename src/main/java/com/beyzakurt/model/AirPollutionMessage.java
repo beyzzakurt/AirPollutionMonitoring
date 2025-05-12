@@ -15,6 +15,8 @@ public class AirPollutionMessage {
 
     private String city;
     private Instant timestamp;
+    private Double lat;
+    private Double lon;
     private Integer aqi;
     private Double pm25;
     private Double pm10;
