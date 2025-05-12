@@ -1,7 +1,7 @@
 package com.beyzakurt.service;
 
 import com.beyzakurt.model.AirPollutionMessage;
-import com.beyzakurt.model.AirPollutionModel;
+import com.beyzakurt.model.AirPollution;
 import com.beyzakurt.model.AnomalyAlert;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +26,13 @@ public class KafkaProducerService {
     @Value("${spring.kafka.topic.anomaly-alerts}")
     private String anomalyAlertsTopic;
 
-    public void sendAirPollutionData(AirPollutionModel model) {
+    public void sendAirPollutionData(AirPollution model) {
         if (model == null || model.getData() == null) {
             log.warn("Gönderilecek hava kirliliği verisi boş");
             return;
         }
 
-        AirPollutionModel.AirPollutionData data = model.getData();
+        AirPollution.AirPollutionData data = model.getData();
 
         Double lat = data.getCity().getLat();
         Double lon = data.getCity().getLon();
