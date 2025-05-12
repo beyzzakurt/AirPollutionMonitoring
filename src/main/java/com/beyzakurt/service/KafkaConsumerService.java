@@ -17,12 +17,15 @@ public class KafkaConsumerService {
 
     private final InfluxDBClient influxDBClient;
 
+
     @KafkaListener(topics = "${spring.kafka.topic.air-pollution}", groupId = "${spring.kafka.consumer.group-id}")
-    public void consumeAirPollutionData(AirPollutionMessage message){
+    public void consumeAirPollutionAnomaly(AirPollutionMessage message){
         log.info("Kafka'dan hava kirliliği verisi alındı: {}", message);
 
         Point point = Point.measurement("air_quality")
                 .addTag("city", message.getCity())
+                .addField("lat", message.getLat())
+                .addField("lon", message.getLon())
                 .addField("aqi", message.getAqi())
                 .addField("pm25", message.getPm25())
                 .addField("pm10", message.getPm10())
@@ -40,6 +43,7 @@ public class KafkaConsumerService {
         }
 
     }
+
 }
 
 
