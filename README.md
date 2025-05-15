@@ -21,7 +21,7 @@ Bu platformun temel amacı, [https://waqi.info](https://waqi.info) sitesinden al
       +-------------------+      +--------------------------+
       | InfluxDB (Time DB)|<--->|  Spring Boot Backend API  |
       +-------------------+      +--------------------------+ 
-                                             |
+                                          |
                            +-----------------+------------------+
                            |       REST API & Endpoints         |
                            +------------------------------------+
