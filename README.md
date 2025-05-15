@@ -13,18 +13,18 @@ Bu platformun temel amacı, [https://waqi.info](https://waqi.info) sitesinden al
 ## 🧱 Sistem Mimarisi
 
 ```
-+-------------------+       +-------------------+       +----------------------------+
-| Air Pollution API |  -->  |     Kafka Queue   |  -->  |  Anomali Detection Service |
-+-------------------+       +-------------------+       +----------------------------+
-                                                          |
-                                                          v
-             +-------------------+      +--------------------------+
-             | InfluxDB (Time DB)|<--->|  Spring Boot Backend API  |
-             +-------------------+      +--------------------------+
-                                                  |
-                                +-----------------+-------------------+
-                                |       REST API & Endpoints         |
-                                +------------------------------------+
++-------------------+       +-------------------+         
+| Air Pollution API |  -->  |     Kafka Queue   |  
++-------------------+       +-------------------+       
+                                          |
+                                          v
+      +-------------------+      +--------------------------+
+      | InfluxDB (Time DB)|<--->|  Spring Boot Backend API  |
+      +-------------------+      +--------------------------+ 
+                                             |
+                           +-----------------+------------------+
+                           |       REST API & Endpoints         |
+                           +------------------------------------+
 ```
 
 ### 📦 Komponentler
@@ -69,7 +69,9 @@ Docker, aşağıdaki container'ları başlatır:
 - InfluxDB (http://localhost:8086)
 
 ### 4. Projeyi Çalıştırın
-Run butonuna basın.
+```bash
+mvn spring-boot:run
+```
 
 ## 🚀 Kullanım Rehberi
 
@@ -284,7 +286,3 @@ Kullanılan yöntemler:
 | `InfluxDB erişilemiyor` | Port 8086'nın açık olduğundan emin olun. |
 | API çağrıları başarısız | Spring Boot loglarını inceleyin |
 
-
-## 📬 İletişim
-
-Herhangi bir sorun ya da öneriniz için bir GitHub issue oluşturabilir ya da PR gönderebilirsiniz.
